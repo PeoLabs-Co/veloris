@@ -28,8 +28,8 @@ veloris/
 Before we write any application code, we need to ensure everyone's Git environment is working perfectly.
 
 1.  Clone this repository to your local machine.
-2.  Create a new branch: git checkout -b feature/add-[your-name]
-3.  Open MEMBERS.md and add your Name, GitHub handle, and your primary role on this project.
+2.  Create a new branch: `git checkout -b feature/add-[your-name]`
+3.  Open [MEMBERS.md](./MEMBERS.md) and add your Name, GitHub handle, and your primary role on this project.
 4.  Commit and push your branch.
-5.  Open a Pull Request against the main branch.
+5.  Open a Pull Request against the `main` branch.
     Once everyone's PR is merged, we will populate the GitHub Project Board with the first UI and API tasks.
