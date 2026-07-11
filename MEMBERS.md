@@ -5,8 +5,7 @@ This document tracks the core contributors building Veloris.
 ## 🛠 The Team
 
 - **Samuel Lwanga** ([@babyanonymouse](https://github.com/babyanonymouse)) - Frontend Architecture / PM
-- _(Your name goes here...)_
-
+-**Lucy** ([@luna540](https://github.com/Luna540)) - Frontend Architecture / storefront
 ---
 
 > ### How to add yourself (Icebreaker Task)
