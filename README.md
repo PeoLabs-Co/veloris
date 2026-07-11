@@ -30,9 +30,6 @@ Before we write any application code, we need to ensure everyone's Git environme
  4. Commit and push your branch.
  5. Open a Pull Request against the main branch.
 Once everyone's PR is merged, we will populate the GitHub Project Board with the first UI and API tasks.
-```
-
----
 
 ### 4. The `MEMBERS.md` File
 Create this file in the root so they have something to edit for their Icebreaker PR.
