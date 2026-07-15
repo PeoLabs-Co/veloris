@@ -6,9 +6,9 @@ A lightweight, headless e-commerce platform and admin dashboard. This project is
 
 Veloris is built using a modular, API-driven monorepo structure to allow parallel development across different tech stacks.
 
-- **Frontend (Storefront):** React & Tailwind CSS (Led by Lucy & Samuel)
+- **Frontend (Storefront):** React(Vite) & Tailwind CSS (Led by Lucy & Samuel)
 - **Frontend (Admin Dashboard):** Vanilla HTML/CSS/JS (Led by Diana & Samuel)
-- **Backend (API):** Node/Python [TBD] (Led by Barbra & Simon)
+- **Backend (API):** Python (Led by Barbra & Simon)
 - **Automations:** n8n webhooks for order alerts (Led by Simon)
 
 ## 📂 Repository Structure
