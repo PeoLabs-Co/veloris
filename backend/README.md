@@ -260,6 +260,16 @@ GET /products
 
 # 📡 API Endpoints
 
+| Method | Endpoint         | Purpose          |
+| ------ | ---------------- | ---------------- |
+| GET    | `/`              | Health check     |
+| GET    | `/products`      | Get all products |
+| GET    | `/products/<id>` | Get one product  |
+| POST   | `/products`      | Create product   |
+| PUT    | `/products/<id>` | Update product   |
+| DELETE | `/products/<id>` | Delete product   |
+
+
 ## Health Check
 
 ```http

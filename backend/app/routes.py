@@ -18,8 +18,7 @@ bp = Blueprint("main", __name__)
 @bp.route("/")
 def home():
     return jsonify({
-        "status": "success",
-        "message": "Veloris Backend API is running"
+        "message": "Backend running successfully"
     })
 
 
