@@ -15,3 +15,5 @@ This document tracks the core contributors building Veloris.
 - **Samuel Lwanga** ([@babyanonymouse](https://github.com/babyanonymouse))
 - Frontend Architecture / PM -**Lucy** ([@luna540](https://github.com/Luna540)) - Frontend Architecture / storefront
 - **Diana** ([@snappytrendy](<(https://github.com/snappytrendy)>) - Frontend Architecture (Admin Dashboard)
+- **Tiphy** ([@simon-tiphy](<(https://github.com/simon-tiphy)>) - Backend & AI Architecture)
+
