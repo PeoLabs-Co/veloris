@@ -1,49 +1,53 @@
 # 🛍️ E-Commerce Backend API (V1)
 
-A RESTful backend API built with **Python**, **Flask**, and **PostgreSQL** for an e-commerce application.
+A RESTful backend API built with **Python**, **Flask**, **PostgreSQL**, and **Gunicorn** for an e-commerce application.
 
-This project provides the backend services for the frontend application by exposing product data through REST APIs and managing the application's database.
+This project provides the backend services for the frontend application by exposing product data through REST APIs, managing the PostgreSQL database, and supporting production deployment with Gunicorn on Render.
 
 ---
 
 # 📌 Project Overview
 
-The goal of this project is to build a scalable and maintainable backend that:
+The goal of this project is to build a scalable, maintainable, and production-ready backend that:
 
-- Serves product data through REST APIs
-- Stores product information in PostgreSQL
-- Supports CRUD operations
-- Can be deployed to Render
-- Follows clean architecture principles
+* Serves product data through REST APIs
+* Stores product information in PostgreSQL
+* Supports CRUD operations
+* Uses database migrations with Flask-Migrate
+* Runs locally with Flask
+* Runs in production with Gunicorn
+* Can be deployed to Render
+* Follows clean architecture principles
 
 ---
 
 # 👥 Team
 
-| Name | Responsibility |
-|-------|---------------|
-| Tiphy | Backend Development |
+| Name   | Responsibility      |
+| ------ | ------------------- |
+| Tiphy  | Backend Development |
 | Barbra | Backend Development |
 
 ---
 
 # 🛠 Tech Stack
 
-- Python 3.12+
-- Flask
-- PostgreSQL
-- SQLAlchemy
-- Flask-Migrate
-- Flask-CORS
-- Python-Dotenv
-- Pipenv
+* Python 3.12+
+* Flask
+* Gunicorn
+* PostgreSQL
+* SQLAlchemy
+* Flask-Migrate
+* Flask-CORS
+* Python-Dotenv
+* Pipenv
 
 ---
 
 # 📁 Project Structure
 
-```
-.......backend/
+```text
+backend/
 │
 ├── app/
 │   ├── __init__.py
@@ -54,23 +58,21 @@ The goal of this project is to build a scalable and maintainable backend that:
 │   └── utils.py
 │
 ├── migrations/
-│
 ├── tests/
-│
 ├── .env
 ├── .gitignore
 ├── Pipfile
 ├── Pipfile.lock
+├── requirements.txt
 ├── run.py
-├── README.md
-└── requirements.txt
+└── README.md
 ```
 
 ---
 
 # 🚀 Getting Started
 
-## 1. Clone the repository
+## 1. Clone the Repository
 
 ```bash
 git clone <repository-url>
@@ -85,7 +87,7 @@ cd backend
 pip install pipenv
 ```
 
-Verify installation
+Verify installation:
 
 ```bash
 pipenv --version
@@ -93,13 +95,15 @@ pipenv --version
 
 ---
 
-## 3. Create the virtual environment
+## 3. Install Project Dependencies
+
+Install all dependencies from the Pipfile.
 
 ```bash
 pipenv install
 ```
 
-Activate it
+Activate the virtual environment:
 
 ```bash
 pipenv shell
@@ -107,7 +111,9 @@ pipenv shell
 
 ---
 
-## 4. Install project dependencies
+## 4. Install Additional Packages
+
+If starting from scratch:
 
 ```bash
 pipenv install flask
@@ -116,14 +122,21 @@ pipenv install flask-migrate
 pipenv install flask-cors
 pipenv install psycopg2-binary
 pipenv install python-dotenv
+pipenv install gunicorn
 ```
 
-Development dependencies
+Development tools:
 
 ```bash
 pipenv install --dev pytest
 pipenv install --dev black
 pipenv install --dev flake8
+```
+
+Generate a requirements file if needed:
+
+```bash
+pipenv requirements > requirements.txt
 ```
 
 ---
@@ -132,19 +145,17 @@ pipenv install --dev flake8
 
 Create a PostgreSQL database.
 
-Example
+Example:
 
-```
+```text
 Database Name:
 veloris_db
 ```
 
-Create a `.env` file in the project root.
-
-Example
+Example `.env` file:
 
 ```env
-DATABASE_URL=postgresql://postgres:password@localhost:5432/veloris_db
+DATABASE_URL=postgresql://veloris_user:password@localhost:5432/veloris_db
 
 SECRET_KEY=change_this_secret_key
 
@@ -157,22 +168,52 @@ FLASK_ENV=development
 
 # ▶ Running the Application
 
-Start the Flask development server
+## Development Server (Flask)
+
+Run:
 
 ```bash
-flask run
+pipenv run flask run
 ```
 
 or
 
 ```bash
-python run.py
+pipenv run python run.py
 ```
 
-Default URL
+Default URL:
 
-```
+```text
 http://127.0.0.1:5000
+```
+
+---
+
+## Production Server (Gunicorn)
+
+Run:
+
+```bash
+pipenv run gunicorn run:app
+```
+
+or specify the port manually:
+
+```bash
+pipenv run gunicorn --bind 0.0.0.0:8000 run:app
+```
+
+Default URL:
+
+```text
+http://127.0.0.1:8000
+```
+
+For Render deployment, use:
+
+```bash
+gunicorn run:app
 ```
 
 ---
@@ -181,41 +222,39 @@ http://127.0.0.1:5000
 
 ## Products Table
 
-| Column | Type |
-|---------|------|
-| id | SERIAL PRIMARY KEY |
-| title | VARCHAR(255) |
-| price | DECIMAL(10,2) |
-| category | VARCHAR(100) |
-| image | TEXT |
-| in_stock | INTEGER |
+| Column   | Type               |
+| -------- | ------------------ |
+| id       | SERIAL PRIMARY KEY |
+| title    | VARCHAR(255)       |
+| price    | DECIMAL(10,2)      |
+| category | VARCHAR(100)       |
+| image    | TEXT               |
+| in_stock | INTEGER            |
 
 ---
 
-# 📦 Product JSON Contract
+# 📦 Product API Contract
 
 The frontend expects the following response from:
 
-```
+```http
 GET /products
 ```
 
-Example response
-
 ```json
 [
-    {
-        "id": 1,
-        "title": "Fjallraven - Foldsack No. 1 Backpack",
-        "price": 109.95,
-        "category": "apparel",
-        "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-        "in_stock": 12
-    }
+  {
+    "id": 1,
+    "title": "Fjallraven - Foldsack No. 1 Backpack",
+    "price": 109.95,
+    "category": "apparel",
+    "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+    "in_stock": 12
+  }
 ]
 ```
 
-⚠️ **Do not change these field names** unless the frontend team is informed.
+> **Important:** Do not change these field names without coordinating with the frontend team.
 
 ---
 
@@ -223,7 +262,7 @@ Example response
 
 ## Health Check
 
-```
+```http
 GET /
 ```
 
@@ -231,7 +270,7 @@ Response
 
 ```json
 {
-    "message": "Backend running successfully"
+  "message": "Backend running successfully"
 }
 ```
 
@@ -239,30 +278,15 @@ Response
 
 ## Get All Products
 
-```
+```http
 GET /products
-```
-
-Returns
-
-```json
-[
-    {
-        "id": 1,
-        "title": "...",
-        "price": 99.99,
-        "category": "...",
-        "image": "...",
-        "in_stock": 12
-    }
-]
 ```
 
 ---
 
-## Get Single Product
+## Get Product by ID
 
-```
+```http
 GET /products/<id>
 ```
 
@@ -270,19 +294,19 @@ GET /products/<id>
 
 ## Create Product
 
-```
+```http
 POST /products
 ```
 
-Request Body
+Example Request
 
 ```json
 {
-    "title": "Gaming Mouse",
-    "price": 49.99,
-    "category": "electronics",
-    "image": "https://image-url",
-    "in_stock": 20
+  "title": "Gaming Mouse",
+  "price": 49.99,
+  "category": "electronics",
+  "image": "https://image-url",
+  "in_stock": 20
 }
 ```
 
@@ -290,7 +314,7 @@ Request Body
 
 ## Update Product
 
-```
+```http
 PUT /products/<id>
 ```
 
@@ -298,82 +322,55 @@ PUT /products/<id>
 
 ## Delete Product
 
-```
+```http
 DELETE /products/<id>
 ```
 
 ---
 
-# 🧩 Development Workflow
+# 🗄 Database Migrations
 
-## Pull latest changes
-
-```bash
-git pull origin main
-```
-
----
-
-## Create a new branch
+Initialize migrations:
 
 ```bash
-git checkout -b feature/your-feature
+pipenv run flask db init
 ```
 
-Example
+Create a migration:
 
 ```bash
-git checkout -b feature/products-api
+pipenv run flask db migrate -m "Create products table"
 ```
 
----
-
-## Commit changes
+Apply migrations:
 
 ```bash
-git add .
-
-git commit -m "Implement products endpoint"
+pipenv run flask db upgrade
 ```
 
----
-
-## Push changes
+Rollback one migration:
 
 ```bash
-git push origin feature/products-api
+pipenv run flask db downgrade
 ```
-
-Create a Pull Request into `main`.
-
----
-
-# 📝 Coding Standards
-
-- Follow PEP 8 style guide.
-- Keep functions small and focused.
-- Write meaningful commit messages.
-- Never commit secrets or passwords.
-- Keep API responses consistent.
-- Use environment variables for configuration.
 
 ---
 
 # 🧪 Testing
 
-Run tests
+Run tests:
 
 ```bash
 pytest
 ```
 
-Format code
+Format code:
 
 ```bash
 black .
 ```
 
-Lint code
+Lint code:
 
 ```bash
 flake8
@@ -381,9 +378,50 @@ flake8
 
 ---
 
-# 📌 Git Ignore
+# 🧩 Git Workflow
 
-Ensure `.gitignore` includes:
+Pull latest changes:
+
+```bash
+git pull origin main
+```
+
+Create a feature branch:
+
+```bash
+git checkout -b feature/products-api
+```
+
+Commit:
+
+```bash
+git add .
+git commit -m "Implement products endpoint"
+```
+
+Push:
+
+```bash
+git push origin feature/products-api
+```
+
+Open a Pull Request for review before merging.
+
+---
+
+# 📝 Coding Standards
+
+* Follow PEP 8
+* Keep functions focused and modular
+* Use SQLAlchemy ORM
+* Store secrets in `.env`
+* Write meaningful commit messages
+* Never commit passwords or API keys
+* Keep API responses consistent
+
+---
+
+# 📌 Recommended `.gitignore`
 
 ```gitignore
 __pycache__/
@@ -402,39 +440,47 @@ htmlcov/
 
 # 🚀 Deployment
 
-Deployment target:
+## Platform
 
-**Render**
+* Render
 
-Production database:
+## Production Server
 
-**PostgreSQL**
+Gunicorn
 
-Deployment environment variables:
+## Production Database
 
-```
+PostgreSQL
+
+## Required Environment Variables
+
+```text
 DATABASE_URL
-
 SECRET_KEY
-
 FLASK_APP
-
 FLASK_ENV
+```
+
+### Render Start Command
+
+```bash
+gunicorn run:app
 ```
 
 ---
 
 # 📅 MVP Goals
 
-- Flask project initialized
-- PostgreSQL connected
-- SQLAlchemy configured
-- Product model created
-- CRUD endpoints implemented
-- JSON responses follow API contract
-- Database migrations working
-- Deployment to Render
-- Documentation completed
+* Flask application configured
+* PostgreSQL connected
+* SQLAlchemy configured
+* Flask-Migrate working
+* Product model created
+* CRUD endpoints completed
+* API follows agreed JSON contract
+* Gunicorn configured
+* Deployment to Render
+* Documentation completed
 
 ---
 
@@ -442,55 +488,58 @@ FLASK_ENV
 
 Before starting work:
 
-1. Pull the latest changes.
+1. Pull the latest code.
 2. Create a feature branch.
-3. Complete your assigned GitHub issue.
+3. Work on your assigned issue.
 4. Test locally.
 5. Push your branch.
 6. Open a Pull Request.
-7. Request a review before merging.
+7. Request a code review.
 
 ---
 
 # 📚 Useful Commands
 
-Create environment
+## Pipenv
 
 ```bash
 pipenv install
-```
-
-Activate environment
-
-```bash
 pipenv shell
-```
-
-Install package
-
-```bash
 pipenv install package-name
+pipenv uninstall package-name
+pipenv graph
+pipenv requirements > requirements.txt
 ```
 
-Run Flask
+## Flask
 
 ```bash
-flask run
+pipenv run flask run
+pipenv run python run.py
 ```
 
-Create migration
+## Gunicorn
 
 ```bash
-flask db migrate -m "Initial migration"
+pipenv run gunicorn run:app
 ```
 
-Apply migration
+Bind to a custom port:
 
 ```bash
-flask db upgrade
+pipenv run gunicorn --bind 0.0.0.0:8000 run:app
 ```
 
-Deactivate environment
+## Database
+
+```bash
+pipenv run flask db init
+pipenv run flask db migrate -m "Migration message"
+pipenv run flask db upgrade
+pipenv run flask db downgrade
+```
+
+## Deactivate Environment
 
 ```bash
 exit
@@ -499,5 +548,3 @@ exit
 ---
 
 # 📄 License
-
-This project is intended for educational and portfolio purposes unless otherwise specified.
