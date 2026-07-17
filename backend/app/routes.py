@@ -1,12 +1,3 @@
-# from flask import Blueprint
-
-# bp = Blueprint("main", __name__)
-
-# @bp.route("/")
-# def home():
-#     return {"message": "Backend running successfully"}
-
-
 from flask import Blueprint, jsonify, request
 
 from app.extensions import db
