@@ -2,12 +2,10 @@
 
 Veloris is a lightweight, headless e-commerce platform with:
 
-- a **React storefront frontend** (Vite + Tailwind CSS)
-- a **Flask backend API** (PostgreSQL + SQLAlchemy + Gunicorn)
+- a React storefront frontend (Vite + Tailwind CSS)
+- a Flask backend API (PostgreSQL + SQLAlchemy + Gunicorn)
 
 This root README combines setup and usage guidance for both parts.
-
----
 
 ## Repository Layout
 
@@ -23,7 +21,7 @@ veloris/
 │   ├── eslint.config.js
 │   ├── public/
 │   └── src/
-└── backend/ (available in `simontiphy` branch)
+└── backend/ (available in the simontiphy branch)
     ├── app/
     ├── migrations/
     ├── tests/
@@ -31,8 +29,6 @@ veloris/
     ├── requirements.txt
     └── run.py
 ```
-
----
 
 ## Frontend
 
@@ -60,11 +56,9 @@ pnpm preview  # preview production build
 pnpm lint     # run ESLint
 ```
 
----
-
 ## Backend
 
-> Backend documentation is sourced from `backend/README.md` in the `simontiphy` branch.
+Backend documentation is sourced from backend/README.md in the simontiphy branch.
 
 ### Stack
 
@@ -114,12 +108,12 @@ FLASK_ENV=development
 
 | Method | Endpoint         | Purpose          |
 | ------ | ---------------- | ---------------- |
-| GET    | `/`              | Health check     |
-| GET    | `/products`      | Get all products |
-| GET    | `/products/<id>` | Get one product  |
-| POST   | `/products`      | Create product   |
-| PUT    | `/products/<id>` | Update product   |
-| DELETE | `/products/<id>` | Delete product   |
+| GET    | /                | Health check     |
+| GET    | /products        | Get all products |
+| GET    | /products/<id>   | Get one product  |
+| POST   | /products        | Create product   |
+| PUT    | /products/<id>   | Update product   |
+| DELETE | /products/<id>   | Delete product   |
 
 ### Database Migrations
 
@@ -129,26 +123,22 @@ pipenv run flask db migrate -m "Create products table"
 pipenv run flask db upgrade
 ```
 
----
-
 ## Product API Contract (Expected by Frontend)
 
-`GET /products` should return items shaped like:
+GET /products should return items shaped like:
 
 ```json
 [
-  {
-    "id": 1,
-    "title": "Fjallraven - Foldsack No. 1 Backpack",
-    "price": 109.95,
-    "category": "apparel",
-    "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-    "in_stock": 12
-  }
+    {
+        "id": 1,
+        "title": "Fjallraven - Foldsack No. 1 Backpack",
+        "price": 109.95,
+        "category": "apparel",
+        "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+        "in_stock": 12
+    }
 ]
 ```
-
----
 
 ## Team / Ownership
 
