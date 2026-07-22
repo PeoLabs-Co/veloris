@@ -7,6 +7,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Homepage />} />
       <Route path="/admin" element={<Dashboard />} />
+      {/* catch all */}
       <Route path="*" element={<h1>404 Not Found</h1>} />
     </Routes>
   );
