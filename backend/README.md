@@ -148,8 +148,7 @@ Create a PostgreSQL database.
 Example:
 
 ```text
-Database Name:
-veloris_db
+Database Name:veloris_db
 ```
 
 Example `.env` file:
