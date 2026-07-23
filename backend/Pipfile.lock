@@ -1,11 +1,11 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "23d7f17621679be9c9a42091138e6f60a683dc34d28233ce0c7b34dfeaecbb6a"
+            "sha256": "3674f29e24306802939071c53b4b4812110f5f0fab837c6d504b40f2fd95fbd7"
         },
         "pipfile-spec": 6,
         "requires": {
-            "python_version": "3"
+            "python_version": "3.12"
         },
         "sources": [
             {
@@ -555,11 +555,11 @@
         },
         "platformdirs": {
             "hashes": [
-                "sha256:31e761a6a0ca04faf7353ea759bdba55652be214725111e5aac52dfa29d4bef7",
-                "sha256:fb516cdb12eb0d857d0cd85a7c57cea4d060bee4578d6cf5a14dfdf8cbf8784a"
+                "sha256:0555d18370482847566ffabcaa53ad7c6c1c29f195989ae1ed634a05f76ea1e0",
+                "sha256:360ccded2b7fce0af0ff80cc8f5942a1c5d99b0e856033acb030bfc634709e74"
             ],
             "markers": "python_version >= '3.10'",
-            "version": "==4.10.0"
+            "version": "==4.11.0"
         },
         "pluggy": {
             "hashes": [
