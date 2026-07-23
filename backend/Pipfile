@@ -4,13 +4,13 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-flask = "*"
-flask-sqlalchemy = "*"
 flask-migrate = "*"
 python-dotenv = "*"
 flask-cors = "*"
 psycopg2-binary = "*"
 gunicorn = "*"
+flask = "*"
+flask-sqlalchemy = "*"
 
 [dev-packages]
 pytest = "*"
@@ -18,4 +18,4 @@ black = "*"
 flake8 = "*"
 
 [requires]
-python_version = "3.12"
+python_version = "3"
