@@ -5,3 +5,7 @@ Thumbs.db
 # IDEs and Editors
 .vscode/
 .idea/
+
+# Python
+.env
+.env.local
