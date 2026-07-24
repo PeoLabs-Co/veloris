@@ -1,11 +1,5 @@
 # Default fallback (if a file is outside these folders, both are tagged)
 
-- @babyanonymouse @simon-tiphy
-
-# Frontend is Samuel's domain
-
+- @babyanonymouse @simon-tiphy @Luna540
 /frontend/ @babyanonymouse
-
-# Backend is Simon's domain
-
 /backend/ @simon-tiphy
