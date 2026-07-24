@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function ProductCard({ product }) {
   return (
     <a href="#" class="group block overflow-hidden">
@@ -9,8 +7,6 @@ export default function ProductCard({ product }) {
           alt=""
           class="absolute inset-0 h-full w-full object-cover opacity-100 group-hover:opacity-0"
         />
-
-
       </div>
 
       <div class="relative bg-white pt-3">
@@ -18,7 +14,9 @@ export default function ProductCard({ product }) {
           {product.name}
         </h3>
 
-        <p class="mt-1.5 tracking-wide text-gray-900">${product.price.toFixed(2)}</p>
+        <p class="mt-1.5 tracking-wide text-gray-900">
+          ${product.price.toFixed(2)}
+        </p>
       </div>
     </a>
   );
