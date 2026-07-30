@@ -1,8 +1,11 @@
 import Navbar from "../components/Navbar";
 import ProductCard from "../components/ProductCard";
-import productData from "../data/products.json";
+import useProducts from "../../hooks/useProducts";
+import DataLoader from "../../shared/components/DataLoader";
 
 const Homepage = () => {
+  const { data: products, loading, error } = useProducts();
+
   return (
     <div className="min-h-screen bg-gray-100">
       {/* navbar component */}
@@ -17,11 +20,20 @@ const Homepage = () => {
         </header>
 
         {/* responsive grid layout */}
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {productData.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+        <DataLoader error={error} loading={loading}>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {products && products.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={{
+                  ...product,
+                  name: product.title || product.name,
+                  imageUrl: product.image || product.imageUrl,
+                }}
+              />
+            ))}
+          </div>
+        </DataLoader>
       </main>
     </div>
   );
