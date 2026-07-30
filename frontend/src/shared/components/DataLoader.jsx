@@ -57,9 +57,11 @@ function ErrorState({ error }) {
  * @param {any} props.data - The loaded data.
  * @param {React.ReactNode | ((data: any) => React.ReactNode)} props.children - Child elements or render function.
  */
-export function DataLoader({ isLoading, error, data, children }) {
-  // 1. Return standardized loading UI if isLoading is true
-  if (isLoading) {
+export function DataLoader({ isLoading, loading, error, data, children }) {
+  const activeLoading = isLoading !== undefined ? isLoading : loading;
+
+  // 1. Return standardized loading UI if activeLoading is true
+  if (activeLoading) {
     return <LoadingState />;
   }
 
@@ -68,8 +70,8 @@ export function DataLoader({ isLoading, error, data, children }) {
     return <ErrorState error={error} />;
   }
 
-  // 3. Return null if data is absent (null or undefined)
-  if (data === null || data === undefined) {
+  // 3. Return null if data is explicitly null
+  if (data === null) {
     return null;
   }
 
