@@ -4,7 +4,7 @@ import useProducts from "../../hooks/useProducts";
 import DataLoader from "../../shared/components/DataLoader";
 
 const Homepage = () => {
-  const { data: products, loading, error } = useProducts();
+  const { data, loading, error } = useProducts();
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -19,19 +19,12 @@ const Homepage = () => {
           </h1>
         </header>
 
-        {/* responsive grid layout */}
         <DataLoader error={error} loading={loading}>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {products && products.map((product) => (
-              <ProductCard
-                key={product.id}
-                product={{
-                  ...product,
-                  name: product.title || product.name,
-                  imageUrl: product.image || product.imageUrl,
-                }}
-              />
-            ))}
+            {data &&
+              data.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
           </div>
         </DataLoader>
       </main>
