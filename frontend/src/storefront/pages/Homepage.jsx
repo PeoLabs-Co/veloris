@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
+import CategoryGrid from "../components/CategoryGrid";
 import ProductCard from "../components/ProductCard";
 import useProducts from "../../hooks/useProducts";
 import DataLoader from "../../shared/components/DataLoader";
@@ -14,6 +15,9 @@ const Homepage = () => {
 
       {/* Hero section */}
       <Hero />
+
+      {/* Category Grid section */}
+      <CategoryGrid />
 
       {/* main content area */}
       <main className="mx-auto max-w-[1440px] px-6 md:px-[var(--spacing-margin-desktop)] py-16">
