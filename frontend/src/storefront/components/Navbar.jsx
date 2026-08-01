@@ -56,7 +56,7 @@ const Navbar = () => {
           href="/"
           className="font-serif text-headline-md tracking-tighter text-primary absolute left-1/2 -translate-x-1/2 flex items-center select-none"
         >
-          Sable & Oak
+          Veloris
         </a>
 
         {/* Right Section: Controls (Cart & Avatar) */}
