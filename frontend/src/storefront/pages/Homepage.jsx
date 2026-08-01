@@ -1,4 +1,5 @@
 import Navbar from "../components/Navbar";
+import Hero from "../components/Hero";
 import ProductCard from "../components/ProductCard";
 import useProducts from "../../hooks/useProducts";
 import DataLoader from "../../shared/components/DataLoader";
@@ -7,16 +8,22 @@ const Homepage = () => {
   const { data, loading, error } = useProducts();
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-background">
       {/* navbar component */}
       <Navbar />
 
+      {/* Hero section */}
+      <Hero />
+
       {/* main content area */}
-      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        <header>
-          <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
+      <main className="mx-auto max-w-[1440px] px-6 md:px-[var(--spacing-margin-desktop)] py-16">
+        <header className="mb-[var(--spacing-stack-lg)]">
+          <span className="text-label-caps text-outline block mb-2">
+            CURATED SELECTION
+          </span>
+          <h2 className="text-headline-lg text-primary font-normal capitalize">
             latest arrivals
-          </h1>
+          </h2>
         </header>
 
         <DataLoader error={error} loading={loading}>
