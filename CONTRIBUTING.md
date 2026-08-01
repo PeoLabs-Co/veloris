@@ -15,6 +15,7 @@ Before starting work, branch off from `main` using the following format:
 To maintain a clean Git history, every Pull Request must automatically close or reference its associated issue.
 
 ### Closing Issues
+
 When creating a Pull Request, you must include one of the following keywords in the PR description followed by the issue number:
 
 - `Fixes #12`
@@ -24,6 +25,7 @@ When creating a Pull Request, you must include one of the following keywords in 
 When the PR is approved and merged into `main`, GitHub will automatically close the linked issue.
 
 ### Referencing Issues / Related Tasks
+
 For tasks or commits that are related to an issue but should not close it automatically, use the `ref` keyword in your PR description or commit message:
 
 - `ref #22` or `(ref #22)` (e.g., `feat: integrate DataLoader (ref #36)`)
