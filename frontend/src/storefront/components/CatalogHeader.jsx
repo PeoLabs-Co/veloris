@@ -63,27 +63,60 @@ export function CatalogHeader({
           <div className="flex items-center gap-[var(--spacing-stack-lg)]">
             <button
               onClick={onFilterClick}
-              className="rounded-none flex items-center gap-2 font-sans uppercase tracking-[0.1em] text-[length:var(--text-label-caps)] text-on-surface-variant hover:text-primary transition-colors cursor-pointer"
+              className="group rounded-none flex items-center gap-2 font-sans uppercase tracking-[0.1em] text-[length:var(--text-label-caps)] text-on-surface-variant hover:text-primary transition-colors cursor-pointer"
             >
               Filter
-              <span
-                className="material-symbols-outlined text-[18px]"
+              <svg
+                className="w-[18px] h-[18px] stroke-current"
+                viewBox="0 0 24 24"
+                fill="none"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 aria-hidden="true"
               >
-                tune
-              </span>
+                <line x1="4" y1="6" x2="20" y2="6" />
+                <circle
+                  cx="8"
+                  cy="6"
+                  r="2"
+                  fill="currentColor"
+                  className="transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-6"
+                />
+                <line x1="4" y1="12" x2="20" y2="12" />
+                <circle
+                  cx="16"
+                  cy="12"
+                  r="2"
+                  fill="currentColor"
+                  className="transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-x-6"
+                />
+                <line x1="4" y1="18" x2="20" y2="18" />
+                <circle
+                  cx="10"
+                  cy="18"
+                  r="2"
+                  fill="currentColor"
+                  className="transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-4"
+                />
+              </svg>
             </button>
             <button
               onClick={onSortClick}
-              className="rounded-none flex items-center gap-2 font-sans uppercase tracking-[0.1em] text-[length:var(--text-label-caps)] text-on-surface-variant hover:text-primary transition-colors cursor-pointer"
+              className="group rounded-none flex items-center gap-2 font-sans uppercase tracking-[0.1em] text-[length:var(--text-label-caps)] text-on-surface-variant hover:text-primary transition-colors cursor-pointer"
             >
               Sort
-              <span
-                className="material-symbols-outlined text-[18px]"
+              <svg
+                className="w-[18px] h-[18px] stroke-current transition-transform duration-300 ease-in-out group-hover:translate-y-1"
+                viewBox="0 0 24 24"
+                fill="none"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 aria-hidden="true"
               >
-                expand_more
-              </span>
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
             </button>
           </div>
         </div>

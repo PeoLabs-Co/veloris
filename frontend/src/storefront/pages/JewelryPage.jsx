@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import CatalogHeader from '../components/CatalogHeader';
+import ScrollReveal from '../components/ScrollReveal';
 import jewelryData from '../data/jewelry.json';
 
 /**
@@ -11,7 +12,7 @@ function JewelryProductCard({ product }) {
     <div className="group cursor-pointer">
       <div className="aspect-[3/4] bg-surface-container-lowest mb-[var(--spacing-stack-lg)] relative overflow-hidden rounded-none">
         <img
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 rounded-none"
+          className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.03] rounded-none"
           src={product.image}
           alt={product.alt || product.title}
         />
@@ -70,8 +71,14 @@ export function JewelryPage() {
         {/* Product Grid Section */}
         <section className="py-20 px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)] max-w-[1440px] mx-auto rounded-none">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-[var(--spacing-gutter)] gap-y-[var(--spacing-section-gap)] rounded-none">
-            {filteredProducts.map((product) => (
-              <JewelryProductCard key={product.id} product={product} />
+            {filteredProducts.map((product, index) => (
+              <ScrollReveal
+                key={`${activeCategory}-${product.id}`}
+                delay={index * 80}
+                duration={700}
+              >
+                <JewelryProductCard product={product} />
+              </ScrollReveal>
             ))}
           </div>
         </section>
