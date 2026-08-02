@@ -1,9 +1,16 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ onNavigate }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const handleLinkClick = (e, toPath) => {
+    if (onNavigate) {
+      e.preventDefault();
+      onNavigate(toPath);
+    }
+  };
 
   const navLinks = [
     { name: "Shoes", href: "/shoes" },
@@ -24,6 +31,7 @@ const Navbar = () => {
                 key={link.name}
                 to={link.href}
                 className="text-label-caps font-sans text-on-surface-variant hover:text-primary transition-colors tracking-widest active:opacity-75 uppercase"
+                onClick={(e) => handleLinkClick(e, link.href)}
               >
                 {link.name}
               </Link>
@@ -63,12 +71,13 @@ const Navbar = () => {
         </div>
 
         {/* Center Section: Brand / Logo */}
-        <a
-          href="/"
+        <Link
+          to="/"
           className="font-serif text-headline-md tracking-tighter text-primary absolute left-1/2 -translate-x-1/2 flex items-center select-none"
+          onClick={(e) => handleLinkClick(e, "/")}
         >
           Veloris
-        </a>
+        </Link>
 
         {/* Right Section: Controls (Cart & Avatar) */}
         <div className="flex items-center gap-[var(--spacing-stack-md)]">
@@ -118,7 +127,10 @@ const Navbar = () => {
                   to="/account"
                   className="block px-4 py-2 text-label-caps font-sans text-on-surface-variant hover:bg-surface-variant hover:text-primary transition-colors uppercase tracking-widest text-[11px]"
                   role="menuitem"
-                  onClick={() => setIsDropdownOpen(false)}
+                  onClick={(e) => {
+                    setIsDropdownOpen(false);
+                    handleLinkClick(e, "/account");
+                  }}
                 >
                   My profile
                 </Link>
@@ -180,7 +192,10 @@ const Navbar = () => {
                 key={link.name}
                 to={link.href}
                 className="text-label-caps font-sans text-on-surface-variant hover:text-primary transition-colors tracking-widest uppercase py-2 border-b border-outline/5"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={(e) => {
+                  setIsMobileMenuOpen(false);
+                  handleLinkClick(e, link.href);
+                }}
               >
                 {link.name}
               </Link>

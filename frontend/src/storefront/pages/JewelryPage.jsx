@@ -44,12 +44,24 @@ function JewelryProductCard({ product }) {
  */
 export function JewelryPage() {
   const [activeCategory, setActiveCategory] = useState('All');
+  const [displayedCategory, setDisplayedCategory] = useState('All');
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  const handleCategoryChange = (newCategory) => {
+    if (newCategory === activeCategory) return;
+    setActiveCategory(newCategory);
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setDisplayedCategory(newCategory);
+      setIsTransitioning(false);
+    }, 300); // Match transition duration (duration-300)
+  };
 
   // Filter products based on selected category
   const filteredProducts =
-    activeCategory === 'All'
+    displayedCategory === 'All'
       ? jewelryData
-      : jewelryData.filter((product) => product.category === activeCategory);
+      : jewelryData.filter((product) => product.category === displayedCategory);
 
   const handleFilterClick = () => {
     console.log('Filter bar button clicked');
@@ -61,61 +73,65 @@ export function JewelryPage() {
 
   return (
     <>
-        <CatalogHeader
-          activeCategory={activeCategory}
-          onCategoryChange={setActiveCategory}
-          onFilterClick={handleFilterClick}
-          onSortClick={handleSortClick}
-        />
+      <CatalogHeader
+        activeCategory={activeCategory}
+        onCategoryChange={handleCategoryChange}
+        onFilterClick={handleFilterClick}
+        onSortClick={handleSortClick}
+      />
 
-        {/* Product Grid Section */}
-        <section className="py-20 px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)] max-w-[1440px] mx-auto rounded-none">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-[var(--spacing-gutter)] gap-y-[var(--spacing-section-gap)] rounded-none">
-            {filteredProducts.map((product, index) => (
-              <ScrollReveal
-                key={`${activeCategory}-${product.id}`}
-                delay={index * 80}
-                duration={700}
-              >
-                <JewelryProductCard product={product} />
-              </ScrollReveal>
-            ))}
-          </div>
-        </section>
-
-        {/* Newsletter Section */}
-        <section className="bg-surface-container py-[var(--spacing-section-gap)] px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)] mt-[var(--spacing-section-gap)] rounded-none">
-          <div className="max-w-2xl mx-auto text-center rounded-none">
-            <p className="font-sans text-[length:var(--text-label-caps)] text-secondary mb-4 uppercase tracking-[0.1em]">
-              THE QUIET LETTER
-            </p>
-            <h2 className="font-serif text-[length:var(--text-headline-lg)] text-primary mb-8 leading-tight">
-              Stories worth pausing for.
-            </h2>
-            <p className="font-sans text-base md:text-[length:var(--text-body-lg)] text-on-surface-variant mb-12 max-w-md mx-auto leading-relaxed">
-              A monthly letter — new arrivals, maker interviews, and ideas on living
-              slowly.
-            </p>
-            <form
-              className="flex flex-col md:flex-row gap-0 max-w-md mx-auto rounded-none"
-              onSubmit={(e) => e.preventDefault()}
+      {/* Product Grid Section */}
+      <section className="py-20 px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)] max-w-[1440px] mx-auto rounded-none">
+        <div
+          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-[var(--spacing-gutter)] gap-y-[var(--spacing-section-gap)] rounded-none transition-opacity duration-300 ${
+            isTransitioning ? 'opacity-0' : 'opacity-100'
+          }`}
+        >
+          {filteredProducts.map((product, index) => (
+            <ScrollReveal
+              key={`${displayedCategory}-${product.id}`}
+              delay={index * 80}
+              duration={700}
             >
-              <input
-                className="flex-grow bg-surface border-none p-4 font-sans text-sm focus:ring-1 focus:ring-primary focus:outline-none rounded-none placeholder:text-outline text-primary"
-                placeholder="your@email.com"
-                type="email"
-                required
-              />
-              <button
-                className="bg-primary text-on-primary px-8 py-4 font-sans text-[length:var(--text-label-caps)] font-semibold uppercase tracking-widest hover:opacity-90 active:scale-95 transition-all rounded-none cursor-pointer"
-                type="submit"
-              >
-                Subscribe
-              </button>
-            </form>
-          </div>
-        </section>
-      </>
+              <JewelryProductCard product={product} />
+            </ScrollReveal>
+          ))}
+        </div>
+      </section>
+
+      {/* Newsletter Section */}
+      <section className="bg-surface-container py-[var(--spacing-section-gap)] px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)] mt-[var(--spacing-section-gap)] rounded-none">
+        <div className="max-w-2xl mx-auto text-center rounded-none">
+          <p className="font-sans text-[length:var(--text-label-caps)] text-secondary mb-4 uppercase tracking-[0.1em]">
+            THE QUIET LETTER
+          </p>
+          <h2 className="font-serif text-[length:var(--text-headline-lg)] text-primary mb-8 leading-tight">
+            Stories worth pausing for.
+          </h2>
+          <p className="font-sans text-base md:text-[length:var(--text-body-lg)] text-on-surface-variant mb-12 max-w-md mx-auto leading-relaxed">
+            A monthly letter — new arrivals, maker interviews, and ideas on living
+            slowly.
+          </p>
+          <form
+            className="flex flex-col md:flex-row gap-0 max-w-md mx-auto rounded-none"
+            onSubmit={(e) => e.preventDefault()}
+          >
+            <input
+              className="flex-grow bg-surface border-none p-4 font-sans text-sm focus:ring-1 focus:ring-primary focus:outline-none rounded-none placeholder:text-outline text-primary"
+              placeholder="your@email.com"
+              type="email"
+              required
+            />
+            <button
+              className="bg-primary text-on-primary px-8 py-4 font-sans text-[length:var(--text-label-caps)] font-semibold uppercase tracking-widest hover:opacity-90 active:scale-95 transition-all rounded-none cursor-pointer"
+              type="submit"
+            >
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </section>
+    </>
   );
 }
 
