@@ -6,10 +6,10 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { name: "Shoes", href: "#" },
-    { name: "Apparel", href: "#" },
+    { name: "Shoes", href: "/shoes" },
+    { name: "Apparel", href: "/apparel" },
     { name: "Jewelry", href: "/jewelry" },
-    { name: "The Collection", href: "#" },
+    { name: "The Collection", href: "/collection" },
   ];
 
   return (
@@ -114,14 +114,14 @@ const Navbar = () => {
                 className="absolute right-0 mt-3 w-48 rounded-none border border-outline/20 bg-surface p-2 z-50"
                 role="menu"
               >
-                <a
-                  href="#"
+                <Link
+                  to="/account"
                   className="block px-4 py-2 text-label-caps font-sans text-on-surface-variant hover:bg-surface-variant hover:text-primary transition-colors uppercase tracking-widest text-[11px]"
                   role="menuitem"
                   onClick={() => setIsDropdownOpen(false)}
                 >
                   My profile
-                </a>
+                </Link>
                 <a
                   href="#"
                   className="block px-4 py-2 text-label-caps font-sans text-on-surface-variant hover:bg-surface-variant hover:text-primary transition-colors uppercase tracking-widest text-[11px]"
