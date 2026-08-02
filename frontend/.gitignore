@@ -24,3 +24,11 @@ dist-ssr
 *.sw?
 
 .env
+
+# Ignore alternate package managers
+package-lock.json
+yarn.lock
+
+# design folder
+*.md
+design/
