@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -7,7 +8,7 @@ const Navbar = () => {
   const navLinks = [
     { name: "Shoes", href: "#" },
     { name: "Apparel", href: "#" },
-    { name: "Jewelry", href: "#" },
+    { name: "Jewelry", href: "/jewelry" },
     { name: "The Collection", href: "#" },
   ];
 
@@ -17,15 +18,25 @@ const Navbar = () => {
         
         {/* Left Section: Navigation Links (Desktop) */}
         <div className="hidden md:flex gap-[var(--spacing-stack-lg)]">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-label-caps font-sans text-on-surface-variant hover:text-primary transition-colors tracking-widest active:opacity-75 uppercase"
-            >
-              {link.name}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            link.href.startsWith("/") ? (
+              <Link
+                key={link.name}
+                to={link.href}
+                className="text-label-caps font-sans text-on-surface-variant hover:text-primary transition-colors tracking-widest active:opacity-75 uppercase"
+              >
+                {link.name}
+              </Link>
+            ) : (
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-label-caps font-sans text-on-surface-variant hover:text-primary transition-colors tracking-widest active:opacity-75 uppercase"
+              >
+                {link.name}
+              </a>
+            )
+          )}
         </div>
 
         {/* Mobile Menu Button (Hamburger) */}
@@ -163,16 +174,27 @@ const Navbar = () => {
       {/* Mobile Menu Panel Overlay */}
       {isMobileMenuOpen && (
         <div className="absolute top-20 left-0 right-0 bg-surface border-b border-outline/15 z-40 p-6 flex flex-col gap-4 md:hidden rounded-none">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-label-caps font-sans text-on-surface-variant hover:text-primary transition-colors tracking-widest uppercase py-2 border-b border-outline/5"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {link.name}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            link.href.startsWith("/") ? (
+              <Link
+                key={link.name}
+                to={link.href}
+                className="text-label-caps font-sans text-on-surface-variant hover:text-primary transition-colors tracking-widest uppercase py-2 border-b border-outline/5"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {link.name}
+              </Link>
+            ) : (
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-label-caps font-sans text-on-surface-variant hover:text-primary transition-colors tracking-widest uppercase py-2 border-b border-outline/5"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {link.name}
+              </a>
+            )
+          )}
         </div>
       )}
     </nav>
