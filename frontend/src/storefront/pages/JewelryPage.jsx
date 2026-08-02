@@ -1,7 +1,5 @@
 import { useState } from 'react';
-import Navbar from '../components/Navbar';
 import CatalogHeader from '../components/CatalogHeader';
-import Footer from '../components/Footer';
 import jewelryData from '../data/jewelry.json';
 
 /**
@@ -61,10 +59,7 @@ export function JewelryPage() {
   };
 
   return (
-    <div className="bg-surface text-on-surface min-h-screen">
-      <Navbar />
-
-      <main className="pt-20">
+    <>
         <CatalogHeader
           activeCategory={activeCategory}
           onCategoryChange={setActiveCategory}
@@ -113,10 +108,7 @@ export function JewelryPage() {
             </form>
           </div>
         </section>
-      </main>
-
-      <Footer />
-    </div>
+      </>
   );
 }
 

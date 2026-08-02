@@ -1,8 +1,6 @@
-import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import CategoryGrid from "../components/CategoryGrid";
 import ProductCard from "../components/ProductCard";
-import Footer from "../components/Footer";
 import useProducts from "../../hooks/useProducts";
 import DataLoader from "../../shared/components/DataLoader";
 
@@ -10,11 +8,7 @@ const Homepage = () => {
   const { data, loading, error } = useProducts();
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Global header/navigation */}
-      <Navbar />
-
-      <main className="pt-20">
+    <>
         {/* 1. Hero Section */}
         <Hero />
 
@@ -173,11 +167,7 @@ const Homepage = () => {
             </form>
           </div>
         </section>
-      </main>
-
-      {/* Footer / Navigation Shell */}
-      <Footer />
-    </div>
+      </>
   );
 };
 
