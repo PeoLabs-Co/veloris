@@ -1,14 +1,22 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ onNavigate }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const handleLinkClick = (e, toPath) => {
+    if (onNavigate) {
+      e.preventDefault();
+      onNavigate(toPath);
+    }
+  };
+
   const navLinks = [
-    { name: "Shoes", href: "#" },
-    { name: "Apparel", href: "#" },
-    { name: "Jewelry", href: "#" },
-    { name: "The Collection", href: "#" },
+    { name: "Shoes", href: "/shoes" },
+    { name: "Apparel", href: "/apparel" },
+    { name: "Jewelry", href: "/jewelry" },
+    { name: "The Collection", href: "/collection" },
   ];
 
   return (
@@ -17,15 +25,26 @@ const Navbar = () => {
         
         {/* Left Section: Navigation Links (Desktop) */}
         <div className="hidden md:flex gap-[var(--spacing-stack-lg)]">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-label-caps font-sans text-on-surface-variant hover:text-primary transition-colors tracking-widest active:opacity-75 uppercase"
-            >
-              {link.name}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            link.href.startsWith("/") ? (
+              <Link
+                key={link.name}
+                to={link.href}
+                className="text-label-caps font-sans text-on-surface-variant hover:text-primary transition-colors tracking-widest active:opacity-75 uppercase"
+                onClick={(e) => handleLinkClick(e, link.href)}
+              >
+                {link.name}
+              </Link>
+            ) : (
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-label-caps font-sans text-on-surface-variant hover:text-primary transition-colors tracking-widest active:opacity-75 uppercase"
+              >
+                {link.name}
+              </a>
+            )
+          )}
         </div>
 
         {/* Mobile Menu Button (Hamburger) */}
@@ -52,12 +71,13 @@ const Navbar = () => {
         </div>
 
         {/* Center Section: Brand / Logo */}
-        <a
-          href="/"
+        <Link
+          to="/"
           className="font-serif text-headline-md tracking-tighter text-primary absolute left-1/2 -translate-x-1/2 flex items-center select-none"
+          onClick={(e) => handleLinkClick(e, "/")}
         >
           Veloris
-        </a>
+        </Link>
 
         {/* Right Section: Controls (Cart & Avatar) */}
         <div className="flex items-center gap-[var(--spacing-stack-md)]">
@@ -103,14 +123,17 @@ const Navbar = () => {
                 className="absolute right-0 mt-3 w-48 rounded-none border border-outline/20 bg-surface p-2 z-50"
                 role="menu"
               >
-                <a
-                  href="#"
+                <Link
+                  to="/account"
                   className="block px-4 py-2 text-label-caps font-sans text-on-surface-variant hover:bg-surface-variant hover:text-primary transition-colors uppercase tracking-widest text-[11px]"
                   role="menuitem"
-                  onClick={() => setIsDropdownOpen(false)}
+                  onClick={(e) => {
+                    setIsDropdownOpen(false);
+                    handleLinkClick(e, "/account");
+                  }}
                 >
                   My profile
-                </a>
+                </Link>
                 <a
                   href="#"
                   className="block px-4 py-2 text-label-caps font-sans text-on-surface-variant hover:bg-surface-variant hover:text-primary transition-colors uppercase tracking-widest text-[11px]"
@@ -163,16 +186,30 @@ const Navbar = () => {
       {/* Mobile Menu Panel Overlay */}
       {isMobileMenuOpen && (
         <div className="absolute top-20 left-0 right-0 bg-surface border-b border-outline/15 z-40 p-6 flex flex-col gap-4 md:hidden rounded-none">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-label-caps font-sans text-on-surface-variant hover:text-primary transition-colors tracking-widest uppercase py-2 border-b border-outline/5"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {link.name}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            link.href.startsWith("/") ? (
+              <Link
+                key={link.name}
+                to={link.href}
+                className="text-label-caps font-sans text-on-surface-variant hover:text-primary transition-colors tracking-widest uppercase py-2 border-b border-outline/5"
+                onClick={(e) => {
+                  setIsMobileMenuOpen(false);
+                  handleLinkClick(e, link.href);
+                }}
+              >
+                {link.name}
+              </Link>
+            ) : (
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-label-caps font-sans text-on-surface-variant hover:text-primary transition-colors tracking-widest uppercase py-2 border-b border-outline/5"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {link.name}
+              </a>
+            )
+          )}
         </div>
       )}
     </nav>

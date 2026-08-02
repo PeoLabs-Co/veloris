@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { apiClient } from '../shared/apiClient';
+import mockProducts from '../storefront/data/products.json';
 
 /**
  * Custom hook to fetch products from the API.
@@ -8,15 +9,22 @@ import { apiClient } from '../shared/apiClient';
 export function useProducts() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error] = useState(null);
 
   useEffect(() => {
     async function fetchProducts() {
       try {
         const products = await apiClient('/products');
-        setData(products);
+        if (Array.isArray(products)) {
+          setData(products);
+        } else {
+          throw new Error('Response is not a valid JSON array');
+        }
       } catch (err) {
-        setError(err.message);
+        console.warn(
+          `[Dev Mode] Fetch products failed (${err.message}). Falling back to mock storefront products.`,
+        );
+        setData(mockProducts);
       } finally {
         setLoading(false);
       }
